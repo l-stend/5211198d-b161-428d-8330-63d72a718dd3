@@ -5,6 +5,8 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import {
   addUserToLocalStorage,
   addTokenToLocalStorage,
+  removeUserFromLocalStorage,
+  removeTokenFromLocalStorage,
 } from '../utils/localStorage';
 
 //variables
@@ -32,6 +34,13 @@ export const loginUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState,
+  reducers: {
+    logoutUser: () => {
+      removeUserFromLocalStorage();
+      removeTokenFromLocalStorage();
+      //toast
+    },
+  },
   extraReducers: {
     [loginUser.pending]: (state) => {
       state.isLoading = true;
@@ -49,5 +58,7 @@ const userSlice = createSlice({
     },
   },
 });
+
+export const { logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

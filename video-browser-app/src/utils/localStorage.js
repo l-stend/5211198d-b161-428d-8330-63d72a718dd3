@@ -5,3 +5,11 @@ export const addUserToLocalStorage = (user) => {
 export const addTokenToLocalStorage = (token) => {
   localStorage.setItem('refreshToken', JSON.stringify(token));
 };
+
+export const removeUserFromLocalStorage = () => {
+  localStorage.removeItem('user');
+};
+
+export const removeTokenFromLocalStorage = () => {
+  localStorage.removeItem('refreshToken');
+};
