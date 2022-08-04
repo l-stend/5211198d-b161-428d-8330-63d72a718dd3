@@ -2,6 +2,10 @@ import { firebaseConfig } from '../firebase-config';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { auth } from '../firebase-config';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import {
+  addUserToLocalStorage,
+  addTokenToLocalStorage,
+} from '../utils/localStorage';
 
 //variables
 const initialState = {
@@ -35,7 +39,8 @@ const userSlice = createSlice({
     [loginUser.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.user = payload.providerData;
-      // addUserToLocalStorage(state.user);
+      addUserToLocalStorage(state.user);
+      addTokenToLocalStorage(payload.refreshToken);
       // toast('Log in Successful');
     },
     [loginUser.rejected]: (state, { payload }) => {
