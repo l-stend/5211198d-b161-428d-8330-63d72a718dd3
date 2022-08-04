@@ -1,4 +1,5 @@
 import './App.css';
+import { firebaseConfig } from './firebase-config';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login, Browse, SingleVideo } from './pages';
 import { ProtectedRoute, SharedLayout } from './components';
