@@ -8,6 +8,7 @@ import {
   removeUserFromLocalStorage,
   removeTokenFromLocalStorage,
 } from '../utils/localStorage';
+import { toast } from 'react-toastify';
 
 //variables
 const initialState = {
@@ -38,7 +39,7 @@ const userSlice = createSlice({
     logoutUser: () => {
       removeUserFromLocalStorage();
       removeTokenFromLocalStorage();
-      //toast
+      toast.success('Logout successful');
     },
   },
   extraReducers: {
@@ -50,11 +51,11 @@ const userSlice = createSlice({
       state.user = payload.providerData;
       addUserToLocalStorage(state.user);
       addTokenToLocalStorage(payload.refreshToken);
-      // toast('Log in Successful');
+      toast('Log in Successful');
     },
     [loginUser.rejected]: (state, { payload }) => {
       state.isLoading = true;
-      // toast.error('Login Failed');
+      toast.error('Login failed');
     },
   },
 });
